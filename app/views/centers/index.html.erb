@@ -1,0 +1,25 @@
+<div align='center'>
+    <h1 class='text-4xl font-bold text-green-900'>Nuestros centros médicos</h1>
+    <%= notice %>
+    <table>
+        <thead class='bg-blue-900 text-white font-light'>
+            <tr>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Ver detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%= @centers.each do |center|%>
+                <tr class="hover:bg-blue-900 hover:text-white">
+                    <td><%= center.name %></td>
+                    <td><%= center.location %></td>
+                    <td><%= link_to 'Ver más', centers_show_path(:id => center.id) %></td>
+                <tr>
+            <% end %>
+        </tbody>
+    </table>
+
+    <button><%= link_to 'Crear centro médico', centers_new_path %></button>
+    <button><%= link_to 'Ver sicólogos', pyschologists_index_path %></button>
+</div>
