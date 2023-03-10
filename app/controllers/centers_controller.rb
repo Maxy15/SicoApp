@@ -7,9 +7,9 @@ class CentersController < ApplicationController
     @centers_params = params.require(:center).permit(:name, :location)
     @center = Center.create(@centers_params)
     if @center.save
-      redirect_to centers_index_path, notice: 'Centro médico creado con éxito' 
+      redirect_to centers_index_path
     else
-      redirect_to centers_index_path, notice: 'Error en la creación del centro'
+      redirect_to centers_index_path
     end
   end
   
@@ -31,9 +31,9 @@ class CentersController < ApplicationController
     @centers_new_params = params.require(:center).permit(:name, :location)
 
     if @center.update(@centers_new_params)
-      redirect_to centers_index_path, notice: 'Centro médico actualizado con éxito'
+      redirect_to centers_index_path
     else
-      redirect_to centers_index_path, notice: 'Error en la actualización del centro'
+      redirect_to centers_index_path
     end
   end
 

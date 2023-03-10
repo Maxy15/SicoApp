@@ -1,17 +1,19 @@
-<h1>Añadir nuevo centro médico</h1>
+<div align='center'>
+  <h1>Añadir nuevo centro médico</h1>
 
-<%= form_with(model: @center, method: :post) do |form| %>
-    <div>
-        <%= form.label :Nombre_del_centro%>
-        <%= form.text_field :name%>
-    </div>
-    <div>
-        <%= form.label :Dirección%>
-        <%= form.text_field :location%>
-    </div>
-    <div>
-        <%= form.submit 'Crear centro médico'%>
-    </div>
-<% end %>
+  <%= form_with(model: @center, method: :post) do |form| %>
+      <div>
+          <%= form.label :Nombre_del_centro%>
+          <%= form.text_field :name%>
+      </div>
+      <div>
+          <%= form.label :Dirección%>
+          <%= form.text_field :location%>
+      </div>
+      <div>
+          <%= form.submit 'Crear centro médico'%>
+      </div>
+  <% end %>
 
-<button><%= link_to 'Volver a centros', centers_index_path %></button>
+  <button><%= link_to 'Volver a centros', centers_index_path %></button>
+</div>

@@ -20,4 +20,9 @@ class CentersControllerTest < ActionDispatch::IntegrationTest
     get centers_edit_url
     assert_response :success
   end
+
+  test "should get delete" do
+    get centers_delete_url
+    assert_response :success
+  end
 end

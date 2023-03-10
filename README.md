@@ -1,12 +1,24 @@
-# SicoApp
-Aplicación web creada con Ruby On Rails (v3.1.0), en donde se usó *Tailwind CSS* para los estilos y para la base de datos se usó Postgres. Para esto, es necesario contar con un archivo llamado *.env* con la siguiente información:
+# README
 
-```bash
-DB_USER=myuser
-DB_PASSWORD=mypassword
-```
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-Además, para correr la aplicación, usar el siguiente comando en la terminal:
-``bash
-./bin/dev 
-```
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...

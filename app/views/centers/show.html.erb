@@ -1,9 +1,11 @@
-<h1>Nombre <%= @center.name %></h1>
+<div class="flex flex-col justify-center items-center">
+  <h1 class="mt-10 text-2xl font-bold">Nombre <%= @center.name %></h1>
 
-<div class='flex flex-col items-center justify-center'>
-    <p>Ubicación: <%= @center.location %><p>
+  <div class='flex flex-col items-center justify-center'>
+      <p>Ubicación: <%= @center.location %><p>
 
-    <button><%= button_to 'Eliminar', centers_delete_path(:id => @center.id), method: :delete %></button>
-    <button><%= link_to 'Editar', centers_edit_path(:id => @center.id) %></button>
-    <button><%= link_to 'Volver', centers_index_path %></button>
+      <button><%= button_to 'Eliminar', centers_delete_path(:id => @center.id), method: :delete %></button>
+      <button><%= link_to 'Editar', centers_edit_path(:id => @center.id) %></button>
+      <button><%= link_to 'Volver', centers_index_path %></button>
+  </div>
 </div>
