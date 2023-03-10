@@ -1,19 +1,58 @@
-<div align='center'>
-  <h1>Añadir nuevo centro médico</h1>
+<div class="flex flex-col justify-center items-center">
+  <!--Nav-->
+  <nav id="header" class="bg-blue-700 fixed w-full z-30 top-0 text-white">
+    <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+      <div class="pl-4 flex items-center">
+        <%= link_to 'SicoApp', centers_index_path, class: 'no-underline hover:no-underline hover:text-white font-bold text-2xl lg:text-4xl' %>
+      </div>
+      <div class="block lg:hidden pr-4">
+        <button id="nav-toggle" class="flex items-center p-1 text-blue-100 hover:text-blue-500 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+          <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <title>Menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
+      </div>
+      <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
+        <ul class="list-reset lg:flex justify-end flex-1 items-center">
+          <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
+            <a class="inline-block py-2 hover:text-blue-100 px-4 text-white no-underline" href="#">Sicólogos</a>
+          </li>
+          <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
+            <a class="inline-block py-2 hover:text-blue-100 px-4 text-white no-underline" href="#">Iniciar sesión</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-  <%= form_with(model: @center, method: :post) do |form| %>
-      <div>
-          <%= form.label :Nombre_del_centro%>
-          <%= form.text_field :name%>
-      </div>
-      <div>
-          <%= form.label :Dirección%>
-          <%= form.text_field :location%>
-      </div>
-      <div>
-          <%= form.submit 'Crear centro médico'%>
-      </div>
-  <% end %>
-
-  <button><%= link_to 'Volver a centros', centers_index_path %></button>
+  <!--Body of page-->
+  <div class="bg-blue-100 w-full pt-40 pb-40">
+    <div class="flex flex-col justify-center items-center">
+      <section class="bg-blue-100 flex flex-col justify-center items-center">
+        <h1 class="mb-10 text-4xl text-blue-900 font-bold">Añadir nuevo centro médico</h1>
+        <%= form_with(model: @center, method: :post, class: 'mb-20 bg-blue-300 px-10 py-10 rounded-md') do |form| %>
+          <div>
+            <%= form.label :Nombre_del_centro, class: 'text-blue-900 text-lg' %><br>
+            <%= form.text_field :name, class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
+          </div>
+          <div class='mt-6'>
+            <%= form.label :Dirección, class: 'text-blue-900 text-lg' %><br>
+            <%= form.text_field :location, class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
+          </div>
+          <div class="mt-10 flex flex-col justify-center items-center">
+            <%= form.submit 'Crear centro médico', class: 'bg-blue-700 font-light text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer'%>
+          </div>
+        <% end %>
+        <button class='bg-blue-700 font-light text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer'><%= link_to 'Volver a centros', centers_index_path %><button>
+      </section>
+    </div>
+  </div>
+  
+  <!--Footer-->
+  <footer class="bg-sky-800 w-full">
+    <div class="container mx-auto px-8 py-2">
+      <h1 class="text-center text-base text-white font-light">Creado por Max Yáñez - Todos los derechos reservados®</h1>
+    </div>
+  </footer>
 </div>
