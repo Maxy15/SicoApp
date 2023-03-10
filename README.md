@@ -7,6 +7,6 @@
  ```
 
  Además, para correr la aplicación, usar el siguiente comando en la terminal:
- ``bash
+ ```bash
  ./bin/dev 
  ```
