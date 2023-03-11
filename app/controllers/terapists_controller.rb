@@ -26,6 +26,13 @@ class TerapistsController < ApplicationController
   end
 
   def update
+    @terapist = Terapist.find(params[:id])
+    @terapists_new_params = params.require(:terapist).permit(:name, :medicalSpecialty)
+    if @terapist.update(@terapists_new_params)
+      redirect_to terapists_index_path
+    else
+      redirect_to terapists_index_path
+    end
   end
 
   def delete

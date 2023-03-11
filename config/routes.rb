@@ -32,5 +32,8 @@ Rails.application.routes.draw do
 
   # EDIT
   get 'terapists/edit'
+  patch 'terapists/update', to: 'terapists#update', as: 'terapists_update'
 
+  # DELETE
+  delete 'terapists/delete', to: 'terapists#delete', as: 'terapists_delete'
 end
