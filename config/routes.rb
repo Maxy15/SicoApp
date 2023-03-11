@@ -36,4 +36,8 @@ Rails.application.routes.draw do
 
   # DELETE
   delete 'terapists/delete', to: 'terapists#delete', as: 'terapists_delete'
+
+  ########## USER ##########
+
+  ########## APPOINTMENT ##########
 end
