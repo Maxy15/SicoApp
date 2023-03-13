@@ -1,7 +1,28 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get 'users/index'
+  get 'users/show'
+
   ########## ROOT ##########
   root to: 'centers#index'
+
+  ########## USER ##########
+  devise_for :users, 
+  controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  },
+  path: '', 
+  path_names: {
+    sign_in: 'login',
+    sign_out: 'logout',
+    sign_up: 'register' 
+  }
+
+  # READ
+  get 'users/:id', to: 'users#show'
+
+  # DELETE
+  match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
 
   ########## CENTER ##########
   
@@ -37,7 +58,9 @@ Rails.application.routes.draw do
   # DELETE
   delete 'terapists/delete', to: 'terapists#delete', as: 'terapists_delete'
 
-  ########## USER ##########
 
   ########## APPOINTMENT ##########
+
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
 end
