@@ -1,53 +1,102 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="flex flex-col justify-center items-center">
+  <!--Nav-->
+  <nav id="header" class="bg-blue-700 fixed w-full z-30 top-0 text-white">
+    <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+      <div class="pl-4 flex items-center">
+        <%= link_to 'SicoApp', centers_index_path, class: 'no-underline hover:no-underline hover:text-white font-bold text-2xl lg:text-4xl' %>
+      </div>
+      <div class="block lg:hidden pr-4">
+        <button id="nav-toggle" class="flex items-center p-1 text-blue-100 hover:text-blue-500 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+          <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <title>Menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
+      </div>
+      <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
+        <ul class="list-reset lg:flex justify-end flex-1 items-center">
+          <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
+            <a class="inline-block py-2 hover:text-blue-100 px-4 text-white no-underline" href="#">Sicólogos</a>
+          </li>
+          <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
+            <a class="inline-block py-2 hover:text-blue-100 px-4 text-white no-underline" href="#">Iniciar sesión</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+  <!--Body of page-->
+  <div class="bg-blue-100 w-full pt-40 pb-40">
+    <div class="flex flex-col justify-center items-center">
+      <section class="bg-blue-100 flex flex-col justify-center items-center">
+        <h1 class="mb-10 text-4xl text-blue-900 font-bold">Editar información de usuario</h1>
+        <div class='mb-20 bg-blue-300 px-10 py-10 rounded-md'>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <div class='my-2 text-blue-900 flex flex-col justify-center items-center text-sm'>
+              <%= render "users/shared/error_messages", resource: resource %>
+            </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "email" %>
+            <div class='flex flex-col justify-center items-center'>
+              <%= f.label :Nombre, class: 'text-blue-900 text-lg' %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
+            </div>
+
+            <div class="mt-6 field flex flex-col justify-center items-center">
+              <%= f.label :Email, class: 'text-blue-900 text-lg' %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
+            </div>
+
+            <div class="mt-6 field flex flex-col justify-center items-center">
+              <%= f.label :phone, class: 'text-blue-900 text-lg' %>
+              <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
+            </div>
+
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
+
+            <div class="mt-6 field flex flex-col justify-center items-center">
+              <div class='flex flex-row'>
+                <%= f.label :Contraseña, class: 'text-blue-900 text-lg' %> 
+                <i class='ml-1 text-blue-900 text-lg'>(dejar en blanco si no quieres cambiarla)</i>
+              </div>
+              <%= f.password_field :password, autocomplete: "new-password", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
+              
+              <% if @minimum_password_length %>
+                <em class="mt-1 text-blue-900 text-lg"><%= @minimum_password_length %> caracteres mínimo</em>
+              <% end %>
+            </div>
+
+            <div class="mt-6 field flex flex-col justify-center items-center">
+              <%= f.label :Confirmar_contraseña, class: 'text-blue-900 text-lg' %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg'%>
+            </div>
+
+            <div class="mt-6 field flex flex-col justify-center items-center">
+              <div class='flex flex-row'>
+                <%= f.label :Contraseña_actual, class: 'text-blue-900 text-lg' %> 
+                <i class='ml-1 text-blue-900 text-lg'>(Necesaria para confirmar cambios)</i>
+              </div>
+              <%= f.password_field :current_password, autocomplete: "current-password", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
+            </div>
+
+            <div class="mt-10 flex flex-col justify-center items-center actions">
+              <%= f.submit "Actualizar", class: 'bg-blue-700 font-light text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer' %>
+            </div>
+          <% end %>
+        </div>
+        <button class='bg-blue-700 font-light text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer'>
+          <%= link_to "Volver", :back %>
+        </button>
+      </section>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.telephone_field :phone, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+  
+  <!--Footer-->
+  <footer class="bg-sky-800 w-full">
+    <div class="container mx-auto px-8 py-2">
+      <h1 class="text-center text-base text-white font-light">Creado por Max Yáñez - Todos los derechos reservados®</h1>
+    </div>
+  </footer>
+</div>
