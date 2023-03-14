@@ -57,14 +57,14 @@
           </div>
           <div class='mt-6'>
             <%= form.label :Fecha, class: 'text-blue-900 text-lg' %><br>
-            <%= form.date_field :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg' %> 
+            <%= form.date_field :date, value: form.object.try(:strftime,"%m/%d/%Y"), onChange: 'filterHours();', id: 'dateForm', class: 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg' %> 
           </div>
           <div class='mt-6'>
             <%= form.label :Hora, class: 'text-blue-900 text-lg' %><br>
             <%= form.select(:hour, 
-                            ['14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'], 
+                            ['- Seleccionar hora -'], 
                             {}, 
-                            { :class => 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg' }) 
+                            { id: 'hoursForm', :class => 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg' }) 
             %>
           </div>
           <div class="mt-10 flex flex-col justify-center items-center">
@@ -100,5 +100,44 @@
         count++;
       }
     }
+
+    function filterHours(){
+      // Add filter for terapist
+      const dateForm = document.getElementById('dateForm').value;
+      const hourForm = document.getElementById('hoursForm');
+      var js_array = [<%= raw @allcites.to_json %>][0];
+      var filterAppointments = js_array.filter(elem => elem.date.slice(0, 10) == dateForm);
+      var hoursAvailable = ['14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
+      var hoursReal = [];
+      
+      while(hourForm.options.length > 0){
+        hourForm.remove(0);
+      }
+
+      var count = 0;
+      while(count < hoursAvailable.length){
+        var count2 = 0;
+        while(count2 < filterAppointments.length){
+          if (filterAppointments[count2].hour == hoursAvailable[count]){
+
+          } else {
+            if (!hoursReal.includes(hoursAvailable[count])){
+              hoursReal.push(hoursAvailable[count]);
+            }
+          }
+          count2++;
+        }
+        count++;
+      }
+
+      var count3 = 0;
+      while (count3 < hoursReal.length){
+        var opt = document.createElement('option');
+        opt.value = hoursReal[count3];
+        opt.innerHTML = hoursReal[count3];
+        hourForm.appendChild(opt); 
+        count3++;
+      }
+    };
   </script>
 </div>

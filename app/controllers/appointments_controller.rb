@@ -3,6 +3,7 @@ class AppointmentsController < ApplicationController
   def new
     @appointment = Appointment.new
     @terapists = Terapist.all
+    @allcites = Appointment.all
   end
 
   def create
