@@ -53,7 +53,7 @@
               <%= link_to 'Editar', centers_edit_path(:id => @center.id) %>
             </button>
             <button class="ml-4 font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
-              <%= link_to 'Nuevo', centers_new_path %>
+              <%= link_to 'Añadir terapeuta', terapists_new_path(:center_id => @center.id) %>
             </button>
             <button class="ml-4 font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
               <%= link_to 'Volver', centers_index_path %>

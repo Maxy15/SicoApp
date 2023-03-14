@@ -1,10 +1,11 @@
 class TerapistsController < ApplicationController
   def new
     @terapist = Terapist.new
+    @center_id = params[:center_id]
   end
 
   def create
-    @terapists_params = params.require(:terapist).permit(:name, :medicalSpecialty)
+    @terapists_params = params.require(:terapist).permit(:center_id, :name, :medicalSpecialty)
     @terapist = Terapist.create(@terapists_params)
     if @terapist.save
       redirect_to terapists_index_path, notice: 'Terapeuta creado con éxito'
@@ -27,7 +28,7 @@ class TerapistsController < ApplicationController
 
   def update
     @terapist = Terapist.find(params[:id])
-    @terapists_new_params = params.require(:terapist).permit(:name, :medicalSpecialty)
+    @terapists_new_params = params.require(:terapist).permit(:center_id, :name, :medicalSpecialty)
     if @terapist.update(@terapists_new_params)
       redirect_to terapists_index_path
     else

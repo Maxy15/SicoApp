@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/index'
-  get 'users/show'
 
   ########## ROOT ##########
   root to: 'centers#index'
@@ -19,6 +17,8 @@ Rails.application.routes.draw do
   }
 
   # READ
+  get 'users/index'
+  get 'users/show'
   get 'users/:id', to: 'users#show'
 
   # DELETE
@@ -60,7 +60,17 @@ Rails.application.routes.draw do
 
 
   ########## APPOINTMENT ##########
+  
+  # CREATE
+  get 'appointments/new'
+  post 'appointments', to: 'appointments#create'
 
+  # READ 
+  get 'appointments/index'
+  get 'appointments/show'
+
+  # DELETE
+  delete 'appointments/delete', to: 'appointments#delete', as: 'appointments_delete'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
 end

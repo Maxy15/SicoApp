@@ -76,7 +76,7 @@
               <%= f.password_field :password, autocomplete: "new-password", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
               
               <% if @minimum_password_length %>
-                <em class="mt-1 text-blue-900 text-lg"><%= @minimum_password_length %> caracteres mínimo</em>
+                <em class="mt-1 text-blue-900 text-sm"><%= @minimum_password_length %> caracteres mínimo</em>
               <% end %>
             </div>
 
@@ -88,7 +88,7 @@
             <div class="mt-6 field flex flex-col justify-center items-center">
               <div class='flex flex-row'>
                 <%= f.label :Contraseña_actual, class: 'text-blue-900 text-lg' %> 
-                <i class='ml-1 text-blue-900 text-lg'>(Necesaria para confirmar cambios)</i>
+                <i class='ml-1 text-blue-900 text-lg'>(necesaria para confirmar cambios)</i>
               </div>
               <%= f.password_field :current_password, autocomplete: "current-password", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
             </div>

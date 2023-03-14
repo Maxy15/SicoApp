@@ -64,9 +64,28 @@
             <h1 class="ml-1 text-xl text-blue-900 font-light"><%= @user.phone %><h1>
           </div>
         </div>
-        <button class="mt-10 mb-40 font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
-          <%= link_to 'Editar perfil', edit_user_registration_path %>
-        </button>
+        <%if current_user.name == 'Admin SicoApp' %>
+          <div class='flex flex-row mt-10 mb-40'>
+            <button class="font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
+              <%= link_to 'Editar perfil', edit_user_registration_path %>
+            </button>
+            <button class="ml-4 font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
+              <%= link_to 'Ver usuarios', users_index_path %>
+            </button>
+            <button class="ml-4 font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
+              <%= link_to 'Crear centro', centers_new_path %>
+            </button>
+          </div>
+        <% else %>
+          <div class='flex flex-row mt-10 mb-40'>
+            <button class="font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
+              <%= link_to 'Editar perfil', edit_user_registration_path %>
+            </button>
+            <button class="ml-4 font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
+              <%= link_to 'Agendar cita', appointments_new_path %>
+            </button>
+          </div>
+        <% end %>
       </section>
     </div>
   </div>

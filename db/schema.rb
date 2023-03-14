@@ -10,15 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_13_122339) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_14_005923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.datetime "date"
+    t.string "hour"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "terapist_id"
+    t.bigint "user_id"
+    t.index ["terapist_id"], name: "index_appointments_on_terapist_id"
+    t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
 
   create_table "centers", force: :cascade do |t|
     t.string "name"
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "terapist_id"
+    t.index ["terapist_id"], name: "index_centers_on_terapist_id"
   end
 
   create_table "terapists", force: :cascade do |t|
@@ -26,6 +39,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_122339) do
     t.string "medicalSpecialty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "center_id"
+    t.index ["center_id"], name: "index_terapists_on_center_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,4 +57,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_122339) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "appointments", "terapists"
+  add_foreign_key "appointments", "users"
+  add_foreign_key "centers", "terapists"
+  add_foreign_key "terapists", "centers"
 end
