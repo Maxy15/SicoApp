@@ -1,6 +1,8 @@
 class AppointmentsController < ApplicationController
+
   def new
     @appointment = Appointment.new
+    @centers = Center.all
   end
 
   def create

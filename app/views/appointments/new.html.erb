@@ -46,19 +46,11 @@
         <%= form_with(model: @appointment, method: :post, class: 'mb-20 bg-blue-300 px-10 py-10 rounded-md') do |form| %>
           <div>
             <%= form.label :Centro, class: 'text-blue-900 text-lg' %><br>
-            <%= form.select(:center, 
-                            ['Centro SJ', 'Centro LF'], 
-                            {}, 
-                            { :class => 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg' }) 
-            %>
+            <%= form.select(:center, Center.all.collect {|c| [c.name, c.id] }, {prompt: "- Seleccionar centro - "}, {class: 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg'}) %>
           </div>
           <div class='mt-6'>
-            <%= form.label :Terapeuta, class: 'text-blue-900 text-lg' %><br>
-            <%= form.select(:center, 
-                            ['Trinidad Albornoz', 'Jessica Solar'], 
-                            {}, 
-                            { :class => 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg' }) 
-            %>
+            <%= form.label :Terapeuta, class: 'text-blue-900 text-lg'%><br>
+            <%= form.select(:terapist_id, Terapist.all.collect {|t| [t.name, t.id] }, {prompt: "- Seleccionar terapeuta - "}, {class: 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg'})%>
           </div>
           <div class='mt-6'>
             <%= form.label :Fecha, class: 'text-blue-900 text-lg' %><br>
@@ -87,4 +79,34 @@
       <h1 class="text-center text-base text-white font-light">Creado por Max Yáñez - Todos los derechos reservados®</h1>
     </div>
   </footer>
+  <script>
+  $("#hour_task_id").prop("disabled", true); // second dropdown is disable while first dropdown is empty
+  $("#hour_project_id").change(function(){
+  	var project = $(this).val();
+  	if(project == ''){
+  		$("#hour_task_id").prop("disabled", true);
+  	}else{
+  		$("#hour_task_id").prop("disabled", false);
+  	}
+  	$.ajax({
+	    url: "/tasks",
+	    method: "GET",  
+	    dataType: "json",
+	    data: {project: project},
+	    error: function (xhr, status, error) {
+	      	console.error('AJAX Error: ' + status + error);
+	    },
+	    success: function (response) {
+	      	console.log(response);
+	      	var tasks = response["tasks"];
+	      	$("#hour_task_id").empty();
+
+	      	$("#hour_task_id").append('<option>Select Task</option>');
+	      	for(var i = 0; i < tasks.length; i++){
+	      		$("#hour_task_id").append('<option value="' + tasks[i]["id"] + '">' +tasks[i]["name"] + '</option>');
+	      	}
+	    }
+  	});
+  });
+  </script>
 </div>

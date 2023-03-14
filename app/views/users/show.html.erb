@@ -64,6 +64,35 @@
             <h1 class="ml-1 text-xl text-blue-900 font-light"><%= @user.phone %><h1>
           </div>
         </div>
+        <div class="mt-10 flex flex-col justify-center items-center">
+          <h1 class="text-3xl text-blue-900 font-bold mb-10">Mis citas agendadas</h1>
+          <table>
+            <thead class="bg-blue-900">
+              <tr>
+                <th class="text-center text-white px-3 py-2">Centro</th>
+                <th class="text-center text-white px-3 py-2">Terapeuta</th>
+                <th class="text-center text-white px-3 py-2">Día</th>
+                <th class="text-center text-white px-3 py-2">Hora</th>
+                <th class="text-center text-white px-3 py-2">Anular</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @appointments.each do |a| %>
+                <tr class="text-blue-900 hover:bg-blue-500 hover:text-white">
+                  <td class="px-3 py-2 text-center"><%= a.terapist.center.name %></td>
+                  <td class="px-3 py-2 text-center"><%= a.terapist.name%></td>
+                  <td class="px-3 py-2 text-center"><%= a.date.strftime("%d/%m/%Y") %></td>
+                  <td class="px-3 py-2 text-center"><%= a.hour %></td>
+                  <td class="px-3 py-2 text-center">
+                    <span class="material-symbols-outlined">
+                      delete_forever
+                    </span>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
         <%if current_user.name == 'Admin SicoApp' %>
           <div class='flex flex-row mt-10 mb-40'>
             <button class="font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
