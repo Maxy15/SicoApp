@@ -46,11 +46,14 @@
         <%= form_with(model: @appointment, method: :post, class: 'mb-20 bg-blue-300 px-10 py-10 rounded-md') do |form| %>
           <div>
             <%= form.label :Centro, class: 'text-blue-900 text-lg' %><br>
-            <%= form.select(:center, Center.all.collect {|c| [c.name, c.id] }, {prompt: "- Seleccionar centro - "}, {class: 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg'}) %>
+            <%= form.select(:center, Center.all.collect {|c| [c.name, c.id] }, {prompt: "- Seleccionar centro - "}, { 
+              onChange: "dropdown();",
+              id: 'first', 
+              class: 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg'}) %>
           </div>
           <div class='mt-6'>
             <%= form.label :Terapeuta, class: 'text-blue-900 text-lg'%><br>
-            <%= form.select(:terapist_id, Terapist.all.collect {|t| [t.name, t.id] }, {prompt: "- Seleccionar terapeuta - "}, {class: 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg'})%>
+            <%= form.select(:terapist_id, Terapist.all.collect {|t| [t.name, t.id] }, {prompt: "- Seleccionar terapeuta - "}, {id: 'second', class: 'mt-1 w-full bg-blue-600 text-base font-light text-white border-2 border-blue-600 rounded-lg'})%>
           </div>
           <div class='mt-6'>
             <%= form.label :Fecha, class: 'text-blue-900 text-lg' %><br>
@@ -65,7 +68,7 @@
             %>
           </div>
           <div class="mt-10 flex flex-col justify-center items-center">
-            <%= form.submit 'Siguiente', class: 'bg-blue-700 font-light text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer'%>
+            <%= form.submit 'Agendar', class: 'bg-blue-700 font-light text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer'%>
           </div>
         <% end %>
         <button class='bg-blue-700 font-light text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer'><%= link_to 'Volver', :back %><button>
@@ -79,34 +82,23 @@
       <h1 class="text-center text-base text-white font-light">Creado por Max Yáñez - Todos los derechos reservados®</h1>
     </div>
   </footer>
-  <script>
-  $("#hour_task_id").prop("disabled", true); // second dropdown is disable while first dropdown is empty
-  $("#hour_project_id").change(function(){
-  	var project = $(this).val();
-  	if(project == ''){
-  		$("#hour_task_id").prop("disabled", true);
-  	}else{
-  		$("#hour_task_id").prop("disabled", false);
-  	}
-  	$.ajax({
-	    url: "/tasks",
-	    method: "GET",  
-	    dataType: "json",
-	    data: {project: project},
-	    error: function (xhr, status, error) {
-	      	console.error('AJAX Error: ' + status + error);
-	    },
-	    success: function (response) {
-	      	console.log(response);
-	      	var tasks = response["tasks"];
-	      	$("#hour_task_id").empty();
-
-	      	$("#hour_task_id").append('<option>Select Task</option>');
-	      	for(var i = 0; i < tasks.length; i++){
-	      		$("#hour_task_id").append('<option value="' + tasks[i]["id"] + '">' +tasks[i]["name"] + '</option>');
-	      	}
-	    }
-  	});
-  });
+  <script type="text/javascript">
+    function dropdown(){
+      const centerID = document.getElementById('first');
+      const secondForm = document.getElementById('second');
+      var js_array = [<%= raw @terapists.to_json %>][0];
+      var filterTerapists = js_array.filter(elem => elem.center_id == parseInt(centerID.value));
+      while(secondForm.options.length > 0){
+        secondForm.remove(0);
+      }
+      var count = 0;
+      while (count < filterTerapists.length){
+        var opt = document.createElement('option');
+        opt.value = filterTerapists[count].id;
+        opt.innerHTML = filterTerapists[count].name;
+        secondForm.appendChild(opt); 
+        count++;
+      }
+    }
   </script>
 </div>
