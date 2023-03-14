@@ -103,13 +103,14 @@
 
     function filterHours(){
       // Add filter for terapist
+      const terapistID = document.getElementById('second').value;
       const dateForm = document.getElementById('dateForm').value;
       const hourForm = document.getElementById('hoursForm');
       var js_array = [<%= raw @allcites.to_json %>][0];
-      var filterAppointments = js_array.filter(elem => elem.date.slice(0, 10) == dateForm);
+      var filterAppointments = js_array.filter(elem => elem.date.slice(0, 10) == dateForm && elem.terapist_id == terapistID);
       var hoursAvailable = ['14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
-      var hoursReal = [];
-      
+      var hoursNotAvailable = [];
+
       while(hourForm.options.length > 0){
         hourForm.remove(0);
       }
@@ -119,17 +120,14 @@
         var count2 = 0;
         while(count2 < filterAppointments.length){
           if (filterAppointments[count2].hour == hoursAvailable[count]){
-
-          } else {
-            if (!hoursReal.includes(hoursAvailable[count])){
-              hoursReal.push(hoursAvailable[count]);
-            }
+            hoursNotAvailable.push(hoursAvailable[count]);
           }
           count2++;
         }
         count++;
       }
-
+      
+      var hoursReal = hoursAvailable.filter(elem => !hoursNotAvailable.includes(elem));
       var count3 = 0;
       while (count3 < hoursReal.length){
         var opt = document.createElement('option');
