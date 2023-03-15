@@ -1,0 +1,7 @@
+<div class="flex flex-col justify-center items-center">
+  <h1 class="text-2xl text-blue-900">Información de su cita agendada</h1>
+  <p class="text-blue-900 text-lg">
+    Ha agendado una hora con <%= @appointment.terapist.name%> para el día <%= @appointment.date.strftime("%d/%m/%Y")%> a las <%= @appointment.hour%> en <%= @appointment.terapist.center.name%>
+    <p>
+  <p class="text-blue-900 text-lg"><%= @greeting %></p>
+</div>
