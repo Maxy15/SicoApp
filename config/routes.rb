@@ -70,6 +70,7 @@ Rails.application.routes.draw do
   get 'appointments/show'
 
   # DELETE
+  get 'appointments/delete', as: 'appointments_delete_page'
   delete 'appointments/delete', to: 'appointments#delete', as: 'appointments_delete'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

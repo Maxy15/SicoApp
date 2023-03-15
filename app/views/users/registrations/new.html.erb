@@ -48,8 +48,13 @@
             </div>
 
             <div class="mt-6 field flex flex-col justify-center items-center">
-              <%= f.label :phone, class: 'text-blue-900 text-lg' %>
+              <%= f.label :Teléfono, class: 'text-blue-900 text-lg' %>
               <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
+            </div>
+
+            <div class="mt-6 field flex flex-col justify-center items-center">
+              <%= f.label :RUT, "RUT", class: 'text-blue-900 text-lg' %>
+              <%= f.text_field :rut, autofocus: true, autocomplete: "phone", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
             </div>
 
             <div class="mt-6 field flex flex-col justify-center items-center">

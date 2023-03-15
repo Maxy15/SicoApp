@@ -47,6 +47,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem 'material_icons'
 gem 'jquery-rails'
+gem 'chilean_rut', '~> 0.4'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

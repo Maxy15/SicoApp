@@ -49,6 +49,17 @@
             <span class="material-symbols-outlined text-blue-900">
               badge
             </span> 
+            <h1 class="ml-2 text-xl text-blue-900 font-light">
+            <% if @user.rut.length == 10 %>
+              <%= @user.rut[0..1] + '.' + @user.rut[2..4] + '.' + @user.rut[5..]%><h1>
+            <% else %>
+              <%= @user.rut[0] + '.' + @user.rut[1..3] + '.'  + @user.rut[4..]%><h1>
+            <% end %>
+          </div>
+          <div class="mt-2 flex flex-row justify-start">
+            <span class="material-symbols-outlined text-blue-900">
+              signature
+            </span> 
             <h1 class="ml-2 text-xl text-blue-900 font-light"><%= @user.name %><h1>
           </div>
           <div class="mt-2 flex flex-row justify-start">
@@ -64,6 +75,7 @@
             <h1 class="ml-1 text-xl text-blue-900 font-light"><%= @user.phone %><h1>
           </div>
         </div>
+        <% if @appointments.length() > 0 %>
         <div class="mt-10 flex flex-col justify-center items-center">
           <h1 class="text-3xl text-blue-900 font-bold mb-10">Mis citas agendadas</h1>
           <table class="border-2 border-blue-900">
@@ -93,13 +105,11 @@
             </tbody>
           </table>
         </div>
+        <% end %>
         <%if current_user.name == 'Admin SicoApp' %>
           <div class='flex flex-row mt-10 mb-40'>
             <button class="font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
               <%= link_to 'Editar perfil', edit_user_registration_path %>
-            </button>
-            <button class="ml-4 font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
-              <%= link_to 'Ver usuarios', users_index_path %>
             </button>
             <button class="ml-4 font-light bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">
               <%= link_to 'Crear centro', centers_new_path %>

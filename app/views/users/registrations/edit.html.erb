@@ -60,8 +60,13 @@
             </div>
 
             <div class="mt-6 field flex flex-col justify-center items-center">
-              <%= f.label :phone, class: 'text-blue-900 text-lg' %>
+              <%= f.label :Teléfono, class: 'text-blue-900 text-lg' %>
               <%= f.telephone_field :phone, autofocus: true, autocomplete: "phone", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
+            </div>
+
+            <div class="mt-6 field flex flex-col justify-center items-center">
+              <%= f.label :RUT_sin_puntos_y_con_guión, "RUT (sin puntos y con guión)", class: 'text-blue-900 text-lg' %>
+              <%= f.text_field :rut, autofocus: true, autocomplete: "rut", onChange: "timer();", id: 'rutForm', class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
             </div>
 
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -111,4 +116,16 @@
       <h1 class="text-center text-base text-white font-light">Creado por Max Yáñez - Todos los derechos reservados®</h1>
     </div>
   </footer>
+  <script>
+    function timer(){
+      setTimeout(checkRUT, 2000);
+    }
+
+    function checkRUT(){
+      const rut = document.getElementById('rutForm').value;
+      if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rut)){
+        alert("RUT no válido");
+      }
+    }
+  </script>
 </div>
