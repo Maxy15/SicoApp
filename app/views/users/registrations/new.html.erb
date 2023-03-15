@@ -16,10 +16,10 @@
       <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
         <ul class="list-reset lg:flex justify-end flex-1 items-center">
           <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
-            <a class="inline-block py-2 hover:text-blue-100 px-4 text-white no-underline" href="#">Sicólogos</a>
+            <%=link_to 'Terapeutas', terapists_index_path, class: 'inline-block py-2 hover:text-blue-100 px-4 text-white no-underline' %>
           </li>
           <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
-            <a class="inline-block py-2 hover:text-blue-100 px-4 text-white no-underline" href="#">Iniciar sesión</a>
+            <%=link_to 'Iniciar sesión', new_user_session_path, class: 'inline-block py-2 hover:text-blue-100 px-4 text-white no-underline' %>
           </li>
         </ul>
       </div>
@@ -53,8 +53,8 @@
             </div>
 
             <div class="mt-6 field flex flex-col justify-center items-center">
-              <%= f.label :RUT, "RUT", class: 'text-blue-900 text-lg' %>
-              <%= f.text_field :rut, autofocus: true, autocomplete: "phone", class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
+              <%= f.label :RUT_sin_puntos_y_con_guión, "RUT (sin puntos y con guión)", class: 'text-blue-900 text-lg' %>
+              <%= f.text_field :rut, autofocus: true, autocomplete: "rut", onChange: "timer();", id: 'rutForm', class: 'mt-1 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg' %>
             </div>
 
             <div class="mt-6 field flex flex-col justify-center items-center">
@@ -90,4 +90,16 @@
       <h1 class="text-center text-base text-white font-light">Creado por Max Yáñez - Todos los derechos reservados®</h1>
     </div>
   </footer>
+  <script>
+    function timer(){
+      setTimeout(checkRUT, 2000);
+    }
+
+    function checkRUT(){
+      const rut = document.getElementById('rutForm').value;
+      if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rut)){
+        alert("RUT no válido");
+      }
+    }
+  </script>
 </div>

@@ -16,7 +16,7 @@
       <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
         <ul class="list-reset lg:flex justify-end flex-1 items-center">
           <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
-            <a class="inline-block py-2 hover:text-blue-100 px-4 text-white no-underline" href="#">Sicólogos</a>
+            <%=link_to 'Terapeutas', terapists_index_path, class: 'inline-block py-2 hover:text-blue-100 px-4 text-white no-underline' %>
           </li>
           <% if current_user %>
             <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">

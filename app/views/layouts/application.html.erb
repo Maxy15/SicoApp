@@ -14,9 +14,11 @@
 
   <body>
     <main>
+      <div class='bg-blue-100 flex flex-col justify-center items-center'>
+        <p class="notice text-blue-900 text-sm"><%= notice %></p>
+        <p class="alert text-blue-900 text-sm"><%= alert %></p>
+      </div>
       <%= yield %>
-      <p class="notice text-blue-900 text-sm"><%= notice %></p>
-      <p class="alert text-blue-900 text-sm"><%= alert %></p>
     </main>
   </body>
 </html>
