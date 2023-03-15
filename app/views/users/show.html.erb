@@ -49,11 +49,10 @@
             <span class="material-symbols-outlined text-blue-900">
               badge
             </span> 
-            <h1 class="ml-2 text-xl text-blue-900 font-light">
             <% if @user.rut.length == 10 %>
-              <%= @user.rut[0..1] + '.' + @user.rut[2..4] + '.' + @user.rut[5..]%><h1>
+              <h1 class="ml-2 text-xl text-blue-900 font-light"><%= @user.rut[0..1] + '.' + @user.rut[2..4] + '.' + @user.rut[5..]%></h1>
             <% else %>
-              <%= @user.rut[0] + '.' + @user.rut[1..3] + '.'  + @user.rut[4..]%><h1>
+              <h1 class="ml-2 text-xl text-blue-900 font-light"><%= @user.rut[0] + '.' + @user.rut[1..3] + '.'  + @user.rut[4..]%></h1>
             <% end %>
           </div>
           <div class="mt-2 flex flex-row justify-start">
@@ -96,9 +95,11 @@
                   <td class="px-3 py-2 text-center"><%= a.date.strftime("%d/%m/%Y") %></td>
                   <td class="px-3 py-2 text-center"><%= a.hour %></td>
                   <td class="px-3 py-2 text-center">
-                    <span class="mt-1 material-symbols-outlined cursor-pointer">
-                      delete_forever
-                    </span>
+                    <a href="<%= appointments_show_path(:id => a.id)%>">
+                      <span class="mt-1 material-symbols-outlined cursor-pointer">
+                        delete_forever
+                      </span>
+                    </a>
                   </td>
                 </tr>
               <% end %>

@@ -1,4 +1,124 @@
-<div>
-  <h1 class="font-bold text-4xl">Appointments#show</h1>
-  <p>Find me in app/views/appointments/show.html.erb</p>
+<div class='flex flex-col justify-center items-center'>
+  <!--Nav-->
+  <nav id="header" class="bg-blue-700 fixed w-full z-30 top-0 text-white">
+    <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+      <div class="pl-4 flex items-center">
+        <%= link_to 'SicoApp', centers_index_path, class: 'no-underline hover:no-underline hover:text-white font-bold text-2xl lg:text-4xl' %>
+      </div>
+      <div class="block lg:hidden pr-4">
+        <button id="nav-toggle" class="flex items-center p-1 text-blue-100 hover:text-blue-500 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+          <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <title>Menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
+      </div>
+      <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
+        <ul class="list-reset lg:flex justify-end flex-1 items-center">
+          <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
+            <%=link_to 'Sicólogos', terapists_index_path, class: 'inline-block py-2 hover:text-blue-100 px-4 text-white no-underline' %>
+          </li>
+          <% if current_user %>
+            <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
+              <%=link_to 'Mi perfil', users_show_path(:id => current_user.id), class: 'inline-block py-2 hover:text-blue-100 px-4 text-white no-underline' %>
+            </li>
+            <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
+              <%=button_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: 'inline-block py-2 hover:text-blue-100 px-4 text-white no-underline' %>
+            </li>
+          <% else %>
+            <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
+              <%=link_to 'Iniciar sesión', new_user_session_path, class: 'inline-block py-2 hover:text-blue-100 px-4 text-white no-underline' %>
+            </li>
+            <li class="hover:bg-blue-500 hover:rounded-md hover:text-black mr-3">
+              <%=link_to 'Registro', new_user_registration_path, class: 'inline-block py-2 hover:text-blue-100 px-4 text-white no-underline' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    
+  <!--Hero-->
+  <div class="bg-blue-100 w-full pt-40">
+    <div class="flex flex-col justify-center items-center">
+      <section class="bg-blue-100 flex flex-col justify-center items-center">
+        <h1 class="text-5xl text-blue-900 font-bold mb-10">¿Quieres cancerlar la cita?</h1>
+        <div class="mb-10 bg-blue-300 px-10 py-10 rounded-md">
+          <div class="flex flex-row justify-start">
+            <span class="material-symbols-outlined text-blue-900">
+              home_health
+            </span>
+            <h1 class="ml-2 text-xl text-blue-900 font-light"><%= @appointment.terapist.center.name%></h1>
+          </div>
+          <div class="mt-2 flex flex-row justify-start">
+            <span class="material-symbols-outlined text-blue-900">
+              clinical_notes
+            </span>
+            <h1 class="ml-2 text-xl text-blue-900 font-light"><%= @appointment.terapist.name%></h1>
+          </div>
+          <div class="mt-2 flex flex-row justify-start">
+            <span class="material-symbols-outlined text-blue-900">
+              event
+            </span>
+            <h1 class="ml-2 text-xl text-blue-900 font-light"><%= @appointment.date.strftime("%d/%m/%Y")%></h1>
+          </div>
+          <div class="mt-2 flex flex-row justify-start">
+            <span class="material-symbols-outlined text-blue-900">
+              alarm
+            </span>
+            <h1 class="ml-2 text-xl text-blue-900 font-light"><%= @appointment.hour%></h1>
+          </div>
+        </div>
+        <div>
+          <h1 class="mt-10 text-3xl text-blue-900 font-bold mb-10">Rellene los siguientes datos</h1>
+          <form class="mb-20 bg-blue-300 px-4 py-10 rounded-md">
+            <div class="flex flex-col justify-center items-center">
+              <label class="text-blue-900 text-lg">Email</label>
+              <input id="email"  class="mt-1 px-2 h-10 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg">
+            </div>
+            <div class="mt-6 flex flex-col justify-center items-center">
+              <label class="text-blue-900 text-lg">Fecha</label>
+              <input id="date"  class="mt-1 px-2 h-10 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg">
+            </div>
+            <div class="mt-6 flex flex-col justify-center items-center">
+              <label class="text-blue-900 text-lg">Hora</label>
+              <input id="hour" class="mt-1 px-2 h-10 bg-blue-900 text-base font-light text-white border-2 border-blue-900 rounded-lg">
+            </div>
+            <div class="mt-10 flex flex-col justify-center items-center">
+              <button onclick="check();" class="bg-blue-700 font-light text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer">Eliminar</button>
+            </div>
+          </form>        
+        </div>
+        <button class='mb-20 bg-blue-700 font-light text-white px-4 py-2 rounded-md hover:bg-blue-400 text-lg cursor-pointer'>
+          <%= link_to 'Volver', :back %>
+        <button>
+      </section>
+    </div>
+  </div>
+
+  <!--Footer-->
+  <footer class="bg-sky-800 w-full">
+    <div class="container mx-auto px-8 py-2">
+      <h1 class="text-center text-base text-white font-light">Creado por Max Yáñez - Todos los derechos reservados®</h1>
+    </div>
+  </footer>
+  <script>
+  function check(){
+    const emailForm = document.getElementById('email').value;
+    const dateForm = document.getElementById('date').value;
+    const hourForm = document.getElementById('hour').value;
+    const email = '<%= @appointment.user.email %>';
+    const date = '<%= @appointment.date.strftime("%d/%m/%Y") %>';
+    const hour = '<%= @appointment.hour %>';
+    if (emailForm.toString() === email && dateForm.toString() === date && hourForm.toString() === hour){
+      var result = confirm("¿Estás seguro?");
+    } else {
+      alert("Los datos ingresados no coinciden con los de la cita");
+    }
+
+    if (result){
+      window.location.replace("<%= appointments_delete_path(:id => @appointment.id) %>");
+    } 
+  }
+  </script>
 </div>
