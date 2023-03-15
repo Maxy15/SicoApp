@@ -10,3 +10,9 @@
  ```bash
  ./bin/dev 
  ```
+
+## Testing
+Fueron creados un total de X tests, con la ayuda de Spec y SimpleCov. Se puede visualizar el porcentaje de cobertura del testing en la carpeta *coverage*, en el archivo *index.html*. Para correr en la consola, usar el siguiente comando:
+ ```bash
+ bundle exec rspec 
+ ```
