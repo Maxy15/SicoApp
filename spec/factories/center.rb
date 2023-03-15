@@ -2,7 +2,7 @@ require 'faker'
 
 FactoryBot.define do
   factory :center do
-    name { Faker::Name.name }
+    name { 'Center Lorem Ipsum' }
     location { Faker::Address.full_address }
     terapist_id { 1 }
     terapist
