@@ -69,3 +69,4 @@ yarn-debug.log*
 # Ignore other files
 .env
 .DS_Store
+public/coverage

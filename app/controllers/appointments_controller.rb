@@ -10,7 +10,7 @@ class AppointmentsController < ApplicationController
     @appointment_params = params.require(:appointment).permit(:date, :hour, :terapist_id).merge(user_id: current_user.id)
     @appointment = Appointment.create(@appointment_params)
     if @appointment.save
-      UserMailer.with(appointment: @appointment).post_mailer.deliver_later
+      UserMailer.with(appointment: @appointment).post_mailer.deliver_now
       redirect_to root_path, notice: 'Cita agendada exitosamente'
     else
       redirect_to root_path, notice: 'Ha ocurrido un error en el agendamiento'
@@ -28,7 +28,7 @@ class AppointmentsController < ApplicationController
       center: @appointment.terapist.center, 
       terapist: @appointment.terapist, 
       date: @appointment.date, 
-      hour: @appointment.hour).delete_mailer.deliver_later
+      hour: @appointment.hour).delete_mailer.deliver_now
   end
 
   def delete
